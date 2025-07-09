@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "leave_management_backend",
+  "main": "src/server.ts",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc"
+  },
+  "author": "Abiram",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12"
+  }
+}
