@@ -3,9 +3,10 @@ import { AuthRoutes } from "./auth.routes";
 import { adminRoutes } from "./admin.routes";
 import { EmployeeRoutes } from "./employee.routes";
 import { Suspense } from "react";
+import { Loader } from "@/components/spinner";
 
 export const AppRoutes = () => (
-  <Suspense fallback={<h1>Loading ...</h1>}>
+  <Suspense fallback={<Loader />}>
     <Routes>
       {AuthRoutes}
       {EmployeeRoutes}

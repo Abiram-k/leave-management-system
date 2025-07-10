@@ -8,6 +8,8 @@ export const validateDto = (dtoClass: any) => {
     const instance = plainToInstance(dtoClass, req.body);
     const errors = await validate(instance);
 
+    console.log(errors);
+
     if (errors.length > 0) {
       return res.status(HttpStatusCode.BAD_REQUEST).json({
         success: false,

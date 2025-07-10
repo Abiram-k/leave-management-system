@@ -1,8 +1,11 @@
+import { lazy } from "react";
 import { Route } from "react-router-dom";
+const AdminDashboard = lazy(
+  () => import("@/features/admin/pages/AdminDashboard")
+);
 
 export const adminRoutes = (
-  //   <Routes>
   <>
-    <Route path="/admin/dashboard" element={<p>Admin Dashboard page</p>} />
+    <Route path="/admin/dashboard" element={<AdminDashboard />} />
   </>
 );

@@ -1,5 +1,7 @@
 import type { FormField } from "@/types/form.type";
 import { AuthForm } from "../components/auth-form";
+import { useLogin } from "../hooks/useLogin";
+import type { LoginForm } from "@/types/auth.type";
 
 const formField: FormField = [
   {
@@ -15,23 +17,31 @@ const formField: FormField = [
     placeholder: "Enter your password",
   },
 ];
+
 const redirect: string = "/auth/register";
 const EmployeeLoginPage = () => {
+  const { login, isLoading } = useLogin("employee");
+
   const onSubmit = (data: Record<string, string>) => {
-    console.log("Login data: ", data);
+    console.log("Login data: ", data, isLoading);
+    login(data as LoginForm);
   };
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-muted px-4">
       <div className="md:w-auto w-full space-y-6 p-8 bg-background rounded-xl shadow-md border">
         <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-bold">Employee Login </h1>
+          <h1 className="text-2xl font-bold">Employee Login</h1>
           <p className="text-sm text-muted-foreground">
             Login now to access your dashboard
           </p>
         </div>
         <AuthForm
+                  isAdmin={false}
+
           formField={formField}
           isLogin
+          isLoading={isLoading}
           redirect={redirect}
           handleFormSubmit={onSubmit}
         />

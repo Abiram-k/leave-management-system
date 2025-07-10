@@ -18,3 +18,12 @@ export const getAuthSchema = (isLogin?: boolean) => {
         }),
   });
 };
+
+export const employeeEditSchema = () => {
+  return Yup.object().shape({
+    email: Yup.string().email("Invalid email*").required("Email is required*"),
+    name: Yup.string()
+      .min(3, "Name must be at least 3 characters*")
+      .required("Name is required*"),
+  });
+};

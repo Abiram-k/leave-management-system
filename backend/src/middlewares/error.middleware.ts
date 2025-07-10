@@ -10,7 +10,9 @@ export const errorHandler = (
 ): void => {
   const statusCode =
     err instanceof AppError
-      ? err.statusCode
+      ? typeof err.statusCode == "string"
+        ? HttpStatusCode.INTERNAL_SERVER_ERROR
+        : err.statusCode
       : HttpStatusCode.INTERNAL_SERVER_ERROR;
 
   res.status(statusCode).json({

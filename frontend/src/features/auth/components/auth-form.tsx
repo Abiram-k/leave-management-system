@@ -13,12 +13,14 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Typography from "@mui/material/Typography";
 import { getAuthSchema } from "../schemas/auth.schema";
-import { ErrorMessage, Formik } from "formik";
+import { Formik } from "formik";
 
 type AuthFormType = React.ComponentProps<"div"> & {
   formField: FormField;
   isLogin?: boolean;
-  redirect: string;
+  redirect?: string;
+  isLoading: boolean;
+  isAdmin: boolean;
   handleFormSubmit: (values: Record<string, string>) => void;
 };
 
@@ -27,6 +29,8 @@ export function AuthForm({
   formField,
   isLogin,
   redirect,
+  isLoading,
+  isAdmin,
   handleFormSubmit,
   ...props
 }: AuthFormType) {
@@ -53,16 +57,16 @@ export function AuthForm({
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col items-center text-center">
                     <Typography variant="h5" fontWeight="bold">
-                      Welcome back
+                      Welcome {isAdmin ? "admin" : "back"}
                     </Typography>
                     <Typography color="text.secondary">
                       Enter your credentials below to proceed!
                     </Typography>
                   </div>
                   {formField.map((field, index) => {
-                    const isPassword = field.name
-                      .toLowerCase()
-                      .includes("password");
+                    const isPassword = ["password", "confirmpassword"].includes(
+                      field.name.toLowerCase()
+                    );
 
                     return (
                       <Box
@@ -81,7 +85,7 @@ export function AuthForm({
                             isPassword
                               ? showPassword
                                 ? "text"
-                                : field.name
+                                : "password"
                               : field.name
                           }
                           error={Boolean(
@@ -134,9 +138,17 @@ export function AuthForm({
                       textTransform: "none",
                       fontWeight: "bold",
                       py: 1.2,
+                      opacity: isLoading ? 0.8 : 1,
+                      cursor: isLoading ? "not-allowed" : "pointer",
                     }}
                   >
-                    {isLogin ? "Login" : "Register"}
+                    {isLoading
+                      ? isLogin
+                        ? "Logging in..."
+                        : "Registering..."
+                      : isLogin
+                      ? "Login"
+                      : "Register"}
                   </Button>
 
                   {redirect && (

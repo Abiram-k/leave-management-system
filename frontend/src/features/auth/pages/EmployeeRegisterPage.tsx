@@ -1,5 +1,7 @@
 import type { FormField } from "@/types/form.type";
 import { AuthForm } from "../components/auth-form";
+import { useRegister } from "../hooks/useRegister";
+import type { RegisterForm } from "@/types/auth.type";
 
 const formField: FormField = [
   {
@@ -30,8 +32,10 @@ const formField: FormField = [
 const redirect: string = "/auth/login";
 
 const EmployeeRegisterPage = () => {
-  const onSubmit = (values: Record<string, string>) => {
-    console.log("Register data: ", values);
+  const { isLoading, register } = useRegister();
+  const onSubmit = (data: Record<string, string>) => {
+    console.log("Register data: ", data);
+    register(data as RegisterForm);
   };
 
   return (
@@ -44,8 +48,10 @@ const EmployeeRegisterPage = () => {
           </p>
         </div>
         <AuthForm
+          isAdmin={false}
           formField={formField}
           redirect={redirect}
+          isLoading={isLoading}
           handleFormSubmit={onSubmit}
         />
       </div>
