@@ -1,4 +1,6 @@
-export interface LeaveData {
+import { RowDataPacket } from "mysql2";
+
+export interface LeaveData extends RowDataPacket {
   id?: number;
   employee_id: number;
   leave_type_id: number;
@@ -8,8 +10,8 @@ export interface LeaveData {
   status?: "Pending" | "Approved" | "Rejected";
   created_at?: string;
 }
-
-
-
-
-
+export interface LeaveTypes extends RowDataPacket {
+  id: number;
+  name: string;
+  max_days: number;
+}

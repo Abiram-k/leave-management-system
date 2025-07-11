@@ -1,3 +1,5 @@
+import { RowDataPacket } from "mysql2";
+
 export const employeeTable = {
   name: "employee",
   schema: `
@@ -12,7 +14,7 @@ export const employeeTable = {
   `,
 };
 
-export interface Employee {
+export interface Employee extends RowDataPacket {
   id: number;
   name: string;
   email: string;

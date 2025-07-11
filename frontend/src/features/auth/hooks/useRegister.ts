@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { useNavigate } from "react-router-dom";
-import type { RegisterForm } from "@/types/auth.type";
+import type { RegisterForm, Role } from "@/types/auth.type";
 import type { ResponseType } from "@/types/response.type";
 import { AuthService } from "@/api/auth.service";
 

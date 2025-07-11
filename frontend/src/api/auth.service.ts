@@ -25,7 +25,7 @@ export class AuthService {
 
   async logout(role: Role): Promise<ResponseType> {
     try {
-      const response = await axiosInstancePublic.post("/auth/logout", {role});
+      const response = await axiosInstancePublic.post("/auth/logout", { role });
       return response.data;
     } catch (error: any) {
       console.log(error);

@@ -10,3 +10,10 @@ export class RegisterDto {
   @MinLength(3)
   name!: string;
 }
+export class UpdateEmployeeDto {
+  @IsEmail()
+  email!: string;
+  @IsString()
+  @MinLength(3)
+  name!: string;
+}

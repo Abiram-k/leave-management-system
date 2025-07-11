@@ -23,8 +23,9 @@ app.get("/", (_, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/employee", verifyEmployee, employeeRoutes); 
-app.use("/api/v1/admin", verifyAdmin, adminRoutes);
+app.use("/api/v1/employee", verifyEmployee, employeeRoutes);
+app.use("/api/v1/admin", verifyEmployee, verifyAdmin, adminRoutes);
 app.use(errorHandler);
 
 export default app;
+ 

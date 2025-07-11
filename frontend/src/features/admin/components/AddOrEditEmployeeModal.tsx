@@ -31,9 +31,9 @@ const AddOrEditEmployeeModal = ({
   setOpen,
   onSubmit,
 }: AddOrEditEmployeeModalProp) => {
-  const validationSchema = editIndex
-    ? employeeEditSchema()
-    : getAuthSchema(false);
+  const validationSchema =
+    editIndex !== null ? employeeEditSchema() : getAuthSchema(false);
+
   console.log("Edit index: ", editIndex, "Form: ", form);
 
   const handleFormSubmit = (values: EmployeeFormType) => {
@@ -48,6 +48,7 @@ const AddOrEditEmployeeModal = ({
 
       <Formik
         initialValues={{
+          id: form.id,
           name: form.name,
           email: form.email,
           password: form.password || "",
@@ -64,76 +65,84 @@ const AddOrEditEmployeeModal = ({
           values,
           handleChange,
           handleBlur,
-        }) => (
-          <form action="" onSubmit={handleSubmit}>
-            <DialogContent dividers>
-              <Stack spacing={2}>
-                <TextField
-                  label="Name"
-                  fullWidth
-                  name="name"
-                  value={values.name}
-                  onChange={handleChange}
-                  placeholder="Enter full name"
-                  type="name"
-                  error={Boolean(touched["name"] && errors["name"])}
-                  helperText={touched["name"] && errors["name"]}
-                  onBlur={handleBlur}
-                />
-                <TextField
-                  label="Email"
-                  type="text"
-                  fullWidth
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  placeholder="Enter Email"
-                  error={Boolean(touched["email"] && errors["email"])}
-                  helperText={touched["email"] && errors["email"]}
-                  onBlur={handleBlur}
-                />
+        }) => {
+          console.log("Formik Errors:", errors);
 
-                {editIndex == null && (
-                  <>
-                    <TextField
-                      label="Password"
-                      name="password"
-                      placeholder="Enter password"
-                      type="password"
-                      error={Boolean(touched["password"] && errors["password"])}
-                      helperText={touched["password"] && errors["password"]}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      fullWidth
-                    />
+          return (
+            <form action="" onSubmit={handleSubmit}>
+              <DialogContent dividers>
+                <Stack spacing={2}>
+                  <TextField
+                    label="Name"
+                    fullWidth
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    placeholder="Enter full name"
+                    type="name"
+                    error={Boolean(touched["name"] && errors["name"])}
+                    helperText={touched["name"] && errors["name"]}
+                    onBlur={handleBlur}
+                  />
+                  <TextField
+                    label="Email"
+                    type="text"
+                    fullWidth
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    placeholder="Enter Email"
+                    error={Boolean(touched["email"] && errors["email"])}
+                    helperText={touched["email"] && errors["email"]}
+                    onBlur={handleBlur}
+                  />
 
-                    <TextField
-                      label="Confirm Password"
-                      name="confirmPassword"
-                      placeholder="Confrim password"
-                      type="password"
-                      error={Boolean(
-                        touched["confirmPassword"] && errors["confirmPassword"]
-                      )}
-                      helperText={
-                        touched["confirmPassword"] && errors["confirmPassword"]
-                      }
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      fullWidth
-                    />
-                  </>
-                )}
-              </Stack>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setOpen(false)}>Cancel</Button>
-              <Button type="submit" variant="contained">
-                {editIndex !== null ? "Update" : "Add"}
-              </Button>
-            </DialogActions>
-          </form>
-        )}
+                  {editIndex == null && (
+                    <>
+                      <TextField
+                        label="Password"
+                        name="password"
+                        placeholder="Enter password"
+                        type="password"
+                        error={Boolean(
+                          touched["password"] && errors["password"]
+                        )}
+                        helperText={touched["password"] && errors["password"]}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        fullWidth
+                      />
+
+                      <TextField
+                        label="Confirm Password"
+                        name="confirmPassword"
+                        placeholder="Confrim password"
+                        type="password"
+                        error={Boolean(
+                          touched["confirmPassword"] &&
+                            errors["confirmPassword"]
+                        )}
+                        helperText={
+                          touched["confirmPassword"] &&
+                          errors["confirmPassword"]
+                        }
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        fullWidth
+                      />
+                    </>
+                  )}
+                </Stack>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setOpen(false)}>Cancel</Button>
+                <Button type="submit" variant="contained">
+                  {editIndex !== null ? "Update" : "Add"}
+                </Button>
+              </DialogActions>
+            </form>
+          );
+        }}
       </Formik>
     </Dialog>
   );

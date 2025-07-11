@@ -99,8 +99,7 @@ export class AuthService implements IAuthService {
         password: hashed,
       });
     } catch (error) {
-      if (error instanceof AppError) { 
-        
+      if (error instanceof AppError) {
         throw error;
       }
       throw new AppError("Error occured while creating new employee!");

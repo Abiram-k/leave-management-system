@@ -12,7 +12,7 @@ const PORT = process.env.BACKEND_PORT || 5000;
 const server = http.createServer(app);
 
 (async () => {
-  await syncSchemas([employeeTable]);
+  // await syncSchemas([employeeTable]);
   // await syncSchemas([leaveTypesTable]); 
   // await syncSchemas([leaveRequestsTable]); 
   server.listen(PORT, () => {

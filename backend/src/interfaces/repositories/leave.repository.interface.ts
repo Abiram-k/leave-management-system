@@ -10,4 +10,8 @@ export interface ILeaveRepository {
   findAll(employee_id: number): Promise<LeaveData[]>;
   delete(id: number): Promise<boolean>;
   getLeaveTypes(): Promise<LeaveTypes[]>;
+  updateLeaveStatus(
+    leaveId: number,
+    status: "Approved" | "Rejected"
+  ): Promise<void>;
 }

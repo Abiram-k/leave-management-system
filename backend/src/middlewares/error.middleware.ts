@@ -15,6 +15,7 @@ export const errorHandler = (
         : err.statusCode
       : HttpStatusCode.INTERNAL_SERVER_ERROR;
 
+  console.log(err);
   res.status(statusCode).json({
     success: false,
     message: err.message || "Something went wrong",

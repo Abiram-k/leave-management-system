@@ -143,4 +143,14 @@ export class LeaveRepository implements ILeaveRepository {
       );
     }
   }
+
+  async updateLeaveStatus(
+    leaveId: number,
+    status: "Approved" | "Rejected"
+  ): Promise<void> {
+    await db.query(`UPDATE leave_requests SET status = ? WHERE id = ?`, [
+      status,
+      leaveId,
+    ]);
+  }
 }

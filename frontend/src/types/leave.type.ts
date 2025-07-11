@@ -5,7 +5,7 @@ export type LeaveResType = {
   startDate: string;
   endDate: string;
   reason: string;
-  status?: "Pending" | "Approved" | "Rejected";
+  status?: LeaveStatus;
   created_at?: string;
 };
 
@@ -14,3 +14,5 @@ export interface LeaveTypes {
   name: string;
   max_days: number;
 }
+
+export type LeaveStatus = "Pending" | "Approved" | "Rejected";
